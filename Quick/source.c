@@ -7,10 +7,10 @@
 int count;
 
 int partition(int *a,int s,int e){
-	int i = s+1,j = e, p = a[s];
-	while(i<=j){
+	int i = s,j = e, p = a[s];
+	while(i<j){
 		count++;
-		while(i<=e && a[i] < p){
+		while(i<e && a[i] < p){
 			count++;
 			i++;
 		}
@@ -20,7 +20,7 @@ int partition(int *a,int s,int e){
 			j--;
 		}
 		//count++;
-		if(i<=j){
+		if(i<j){
 			//count++;
 			int temp = a[j];
 			a[j] = a[i];
@@ -28,16 +28,13 @@ int partition(int *a,int s,int e){
 			i++;
 			j--;
 		}
-		if(i==j && a[i] == p){
-			count++;
-			return j;
-		}
+		
 	} 
-	if(a[j]!=a[e]){
-	int temp = a[s];
-	a[s] = a[j];
-	a[j]= a[s];
-	}
+	
+		int temp = a[s];
+		a[s] = a[j];
+		a[j]= temp;
+
 
 	return j;
 }
@@ -50,14 +47,14 @@ void quick(int *a,int s,int e){
 	}
 }
 void analysis(int ch){
-	FILE *f;
+	FILE *f,*d;
 	srand(time(NULL));
 	int *a,*b,*w;
 	for(int i = 10;i<=100;i+=10){
 		a = (int *)malloc(sizeof(int)*i);
 		b = (int *)malloc(sizeof(int)*i);
 		w = (int *)malloc(sizeof(int)*i);
-
+		//d = fopen("data.txt","a");
 		for(int j = 0;j<i;j++){
 			b[j] = X;
 			w[j] = j;

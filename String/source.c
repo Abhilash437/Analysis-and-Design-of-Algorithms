@@ -1,16 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int match(int t[],int p[],int i){
+int match(int t[],int p[],int m){
 	int count = 0;
-	for(int j = 0;j<=100;j++){
-		int k = 0;
+	for(int i = 0;i<100-m;i++){
+		int j = 0;
 		count++;
-		while(k<i && t[j+k] == p[k]){
+		while(j<m && t[j+i] == p[j]){
 			count++;
-			k++;
+			j++;
 		}
-		if(k==i)
+		if(j==m)
 			break;
 	}
 	return count;
@@ -20,7 +20,7 @@ int match(int t[],int p[],int i){
 void analysis(int ch){
 	FILE *f;
 	int *b,*w,*a,t[100];
-	for(int j = 0;j<=100;j++)
+	for(int j = 0;j<100;j++)
 			t[j] = 0;
 	for(int i=2;i<10;i++){
 		b = (int *)malloc(sizeof(int)*i);
@@ -53,7 +53,7 @@ void analysis(int ch){
 				break;
 		}
 
-		fprintf(f, "%d %d\n",i,count );
+		fprintf(f,"%d %d\n",i,count );
 		fclose(f);
 	}
 }
@@ -67,8 +67,12 @@ int main(){
 		switch(ch){
 			case 1:
 			case 2:
-			case 3: analysis(ch);break;
-			default:exit(1);
+			case 3: 
+				analysis(ch);
+				printf("Hi\n");
+				break;
+			default:
+				exit(1);
 		}
 	}
 }

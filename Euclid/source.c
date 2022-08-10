@@ -17,32 +17,29 @@ float euclid(int m,int n){
 }
 
 float consec(int m,int n){
-	float count1=0,count2=0;
+	//float count1=0,count2=0;
 	int min;
+	float count = 0;
 	min = m<n?m:n;
-	printf("Hi\n");
-	while(1){
-		count1++;
-		if(m%min==0){
-			count2++;
-			if(n%min==0)
-				break;
-		}else
-			min = min-1;
+	//printf("Hi\n");
+	for(int hcf = min;hcf>=1;hcf--){
+		count++;
+		if(m%hcf==0 && n%hcf == 0)
+			break;
 	}
 
-	return count1>count2?count1:count2;
+	return count;
 }
 
 float me(int m,int n){
 	int temp;
 	float count = 0;
-	printf("Hi2\n");
+	//printf("Hi2\n");
 	while(n>0){
 		if(m<n){
 			temp = m;
 			m = n;
-			n = m;
+			n = temp;
 		}
 		count+=0.5;
 		m = m-n;
@@ -96,8 +93,8 @@ void analysis(int ch){
 				break;
 		}
 
-		fprintf(f1,"%d %f\n",i,mincount);
-		fprintf(f2,"%d %f\n",i,maxcount);
+		fprintf(f1,"%d %.f\n",i,mincount);
+		fprintf(f2,"%d %.f\n",i,maxcount);
 
 		fclose(f1);
 		fclose(f2);

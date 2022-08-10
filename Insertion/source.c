@@ -7,7 +7,6 @@ void isort(int *a,int n){
 	for(int i = 1;i<n;i++){
 		int v = a[i];
 		int k = i-1;
-		
 		while(k>=0 && a[k]>v){
 			count++;
 			a[k+1] = a[k];
