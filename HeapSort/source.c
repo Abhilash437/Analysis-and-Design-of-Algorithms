@@ -39,7 +39,7 @@ void Hin(int *a,int n){
 		int v = a[i];
 		int k = i;
 		int heap = 0;
-		printf("Hi\n");
+		//printf("Hi\n");
 		while(!heap && 2*k<=n){
 			int j = 2*k;
 			if(j<n){
@@ -85,8 +85,8 @@ void analysis(int ch){
 				f = fopen("conw.txt","a");
 				break;
 			case 3:
-				//Hin(b,i-1);
-				Hdel(b,i-1);
+				Hin(w,i-1);
+				Hdel(w,i-1);
 				f = fopen("del.txt","a");
 				break;
 		}

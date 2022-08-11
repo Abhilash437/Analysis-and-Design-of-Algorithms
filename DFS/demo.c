@@ -10,20 +10,21 @@
 int state[MAX];
 int V[MAX];
 int count;
+int bop;
 int cycles;
+int connected;
 
 void DFS(int a[100][100],int v,int n){
-	int i;
-	state[v] = visited;
 	count++;
 	V[v] = count;
-	printf("%d - %d\n",v,count);
-	for(i = 0;i<n;i++){
-		if(a[v][i] == 1){
-			if(state[i] == initial)
+	state[v] = visited;
+	for(int i = 0;i<n;i++){
+		bop++;
+		if(a[v][i]==1){
+			//bop++;
+			if(state[i]==initial)
 				DFS(a,i,n);
 			else if(state[i] == finished){
-				printf("There exists a back edge from %d to %d\n",v,i);
 				cycles++;
 			}
 		}
@@ -36,30 +37,35 @@ void dfs(int a[100][100],int n){
 		V[i] = 0;
 		state[i] = initial;
 	}
-	count = 0;
 	cycles = 0;
-	//DFS(a,0,n);
-
+	bop = 0;
+	count  = 0;
+	connected = -1;
 	for(int i = 0;i<n;i++){
 		if(state[i] == initial){
-			//printf("%d\n",i);
 			DFS(a,i,n);
+			connected++;
 		}
 	}
-	if(cycles>0)
-		printf("There exists cycles in the graph\n");
+	if(connected>0)
+		printf("Disconnected graph\n");
 	else
-		printf("Graph is acyclic\n");
+		printf("connected graph\n");
+	if(cycles>0)
+		printf("Cyclic graph\n");
+	else
+		printf("Acyclic graph\n");
 }
 
 int main(){
 	int n;
-	printf("Enter the number of vertices\n");
-	scanf("%d",&n);
+	printf("Enter number of vertices\n");
+		scanf("%d",&n);
 	int a[100][100];
 	printf("Enter the adjacency matrix\n");
 	for(int i = 0;i<n;i++)
 		for(int j = 0;j<n;j++)
 			scanf("%d",&a[i][j]);
 	dfs(a,n);
+	printf("BOP = %d\n",bop);
 }

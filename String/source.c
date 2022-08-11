@@ -3,9 +3,9 @@
 
 int match(int t[],int p[],int m){
 	int count = 0;
-	for(int i = 0;i<100-m;i++){
+	for(int i = 0;i<10-m;i++){
 		int j = 0;
-		count++;
+		//count++;
 		while(j<m && t[j+i] == p[j]){
 			count++;
 			j++;
@@ -20,13 +20,13 @@ int match(int t[],int p[],int m){
 void analysis(int ch){
 	FILE *f;
 	int *b,*w,*a,t[100];
-	for(int j = 0;j<100;j++)
+	for(int j = 0;j<10;j++)
 			t[j] = 0;
 	for(int i=2;i<10;i++){
 		b = (int *)malloc(sizeof(int)*i);
 		a = (int *)malloc(sizeof(int)*i);
 		w = (int *)malloc(sizeof(int)*i);
-		printf("hi\n");
+		//printf("hi\n");
 		
 
 		for(int j = 0;j<i;j++){

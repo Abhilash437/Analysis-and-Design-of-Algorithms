@@ -13,58 +13,56 @@ typedef struct queue{
 }Q;
 
 Q q;
-int count,V[100],connected,cyclic;
+int V[100],cyclic,connected,count;
 
-void dequeue(int n){
+void dequeue(){
 	q.f++;
 }
 
-void enqueue(int v,int n){
-	q.r = (q.r+1)%n;
+void enqueue(int v){
+	q.r = (q.r+1);
 	q.items[q.r].v = v;
 	q.items[q.r].flag = 0;
 }
 
-void bfs(int *a[100],int v,int n){
+void dfs(int *a[],int v,int n){
 	count++;
 	V[v] = count;
-	enqueue(v,n);
 	printf("%d - %d\n",v,count);
+	enqueue(v);
 	while(q.f<=q.r){
 		q.items[q.f].flag = 1;
-		for(int i = 0;i<n;i++){
+		for(int i = 0;i<n;i++)
 			if(a[q.items[q.f].v][i] == 1){
-				if(V[i] == 0){
+				if(V[i]==0){
 					count++;
 					V[i] = count;
 					printf("%d - %d\n",i,count);
-					enqueue(i,n);
-				}
-				else if(q.items[q.items[i].v].flag == 0){
+					enqueue(i);
+				}else if(q.items[q.items[i].v].flag == 0)
 					cyclic++;
-				}
 			}
-		}
-		dequeue(n);
+		dequeue();
 	}
 }
 
-void BFS(int *a[100],int n){
-	count = 0;
-	connected = -1;
+void BFS(int *a[],int n){
 	for(int i = 0;i<n;i++)
 		V[i] = 0;
+	cyclic = 0;
+	connected = -1;
+	count = 0;
+	q.r = -1;
+	q.f = 0;
 	for(int i = 0;i<n;i++)
 		if(V[i] == 0){
-			printf("BFS tree %d\n",connected+2);
-			bfs(a,i,n);
+			dfs(a,i,n);
 			connected++;
 		}
 	if(cyclic>0)
-		printf("Graph contains cycle\n");
-	if(connected>0)
-		printf("Disconnected\n");
+		printf("Cyclic\n");
 }
+
 
 int main(){
 	int v;

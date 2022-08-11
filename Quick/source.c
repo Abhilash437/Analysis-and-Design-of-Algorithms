@@ -7,10 +7,11 @@
 int count;
 
 int partition(int *a,int s,int e){
-	int i = s,j = e, p = a[s];
+	int i = s,j = e,p = a[s];
 	while(i<j){
 		count++;
-		while(i<e && a[i] < p){
+		while(i<e && a[i]<p)
+		{
 			count++;
 			i++;
 		}
@@ -19,23 +20,17 @@ int partition(int *a,int s,int e){
 			count++;
 			j--;
 		}
-		//count++;
 		if(i<j){
-			//count++;
-			int temp = a[j];
-			a[j] = a[i];
-			a[i] = temp;
+			int temp = a[i];
+			a[i] = a[j];
+			a[j] = temp;
 			i++;
 			j--;
 		}
-		
-	} 
-	
-		int temp = a[s];
-		a[s] = a[j];
-		a[j]= temp;
-
-
+	}
+	int temp = a[s];
+	a[s] = a[j];
+	a[j] = temp;
 	return j;
 }
 

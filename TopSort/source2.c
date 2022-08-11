@@ -7,7 +7,7 @@ typedef struct queue{
 	int count;
 }Q;
 
-int inq[100];
+//int inq[100];
 Q q;
 
 void indegree(int *a[100],int v,int *inq,int *flag){

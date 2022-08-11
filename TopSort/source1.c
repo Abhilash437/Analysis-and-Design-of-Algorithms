@@ -1,38 +1,42 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+#define initial 1
+#define visited 2
+#define finished 3
 
+int state[100];
 int count,bop,cyclic,V[100],top[100];
 
-void cycle(int v,int *a[100],int n){
-	for(int i = 0;i<n;i++)
-		if(a[v][i] == 1 && V[i]!=0)
-		{
-			printf("Cycle exists hence no solution\n");
-			exit(1);
-		}
-}
 
 void dfs(int v,int *a[100],int n){
 	V[v] = -9;
-	cycle(v,a,n);
+	state[v] = visited;
+	//cycle(v,a,n);
 	for(int i = 0;i<n;i++)
-		if(a[v][i] == 1)
-			if(V[i] == 0){
+		if(a[v][i] == 1){
+			if(state[i]==initial){
 				dfs(i,a,n);
+			}else if(state[i] == visited){
+				printf("Cycles exists hence no solution\n");
+				exit(1);
 			}
+		}
 	count++;
 	V[v] = count;
+	state[v] = finished;
 	top[count-1] = v;
 }
 
 void DFS(int *a[100],int n){
-	for(int i = 0;i<n;i++)
+	for(int i = 0;i<n;i++){
+		state[i] = initial;
 		V[i] = 0;
+	}
 
 	count = 0;
 	for(int i = 0;i<n;i++)
-		if(V[i] == 0)
+		if(state[i]==initial)
 			dfs(i,a,n);
 }
 
